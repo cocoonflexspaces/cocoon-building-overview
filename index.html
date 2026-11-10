@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cocoon Flex Spaces — Board Overview</title>
+<meta name="description" content="How Cocoon Flex Spaces partners with residential buildings in New York City." />
+<style>
+  :root {
+    --cream:          #F5F2E8;
+    --cream-deep:     #ECE7D6;
+    --cream-warm:     #EFE9D7;
+    --terracotta:     #F54029;
+    --teal:           #275453;
+    --ink:            #1A1A1A;
+    --ink-soft:       #4A4A4A;
+    --ink-mute:       #6B6B6B;
+    --rule:           rgba(26,26,26,0.12);
+    --rule-soft:      rgba(26,26,26,0.06);
+    --max:            1280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: var(--terracotta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* TYPE */
+  .superhead {
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.16em; font-size: 11px; color: var(--terracotta);
+  }
+  .title {
+    font-weight: 700; font-size: clamp(36px, 5.5vw, 80px);
+    line-height: 1.0; letter-spacing: -0.025em; margin: 0;
+  }
+  .headline {
+    font-weight: 500; font-size: clamp(21px, 2.8vw, 34px);
+    line-height: 1.2; letter-spacing: -0.012em; margin: 0 0 0.6em;
+  }
+  .lede {
+    font-weight: 400; font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.55; color: var(--ink-soft); margin: 0 0 1em;
+  }
+  .eyebrow {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em;
+    font-weight: 700; color: var(--terracotta); margin-bottom: 14px;
+  }
+
+  /* LAYOUT */
+  section {
+    padding: clamp(56px, 9vh, 120px) clamp(24px, 5vw, 80px);
+    max-width: var(--max); margin: 0 auto;
+  }
+  section + section { border-top: 1px solid var(--rule); }
+  section.full { max-width: none; padding-left: 0; padding-right: 0; }
+
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1.35fr;
+    gap: clamp(40px, 6vw, 96px); align-items: start;
+  }
+  @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* TOP BAR */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245,242,232,0.92);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topbar-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 14px clamp(24px, 5vw, 80px);
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .topbar-brand { display: flex; align-items: center; gap: 18px; }
+  .topbar-brand .cocoon { display: flex; align-items: center; gap: 10px; padding-right: 18px; }
+  .topbar-brand .bar { width: 1px; height: 22px; background: var(--rule); flex: 0 0 auto; }
+  .topbar-brand .label {
+    font-weight: 600; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--ink);
+  }
+  .topbar-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-soft); font-weight: 600; }
+  @media (max-width: 700px) { .topbar-meta { display: none; } }
+  .wordmark { height: 16px; width: auto; }
+  .logomark { width: 28px; height: 28px; }
+
+  /* COVER */
+  .cover {
+    position: relative; background: var(--cream); padding: 0;
+    max-width: none; border-bottom: 1px solid var(--rule); overflow: hidden;
+  }
+  .cover-grid { display: grid; grid-template-columns: 1.2fr 1fr; min-height: 620px; }
+  .cover-text {
+    padding: clamp(40px, 6vw, 88px);
+    display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
+  }
+  .cover-image { position: relative; overflow: hidden; background: var(--ink); }
+  .cover-image img { width: 100%; height: 100%; object-fit: cover; }
+  .cover-meta {
+    font-size: 13px; line-height: 1.75; color: var(--ink-soft);
+    border-top: 1px solid var(--rule); padding-top: 24px;
+  }
+  .cover-meta strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 860px) { .cover-grid { grid-template-columns: 1fr; } .cover-image { min-height: 300px; } }
+
+  /* STAT GRID */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 36px; }
+  .stat { border-top: 2px solid var(--terracotta); padding-top: 18px; }
+  .stat .num { font-size: clamp(30px, 3.5vw, 48px); font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: var(--terracotta); }
+  .stat .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.13em; color: var(--ink-soft); margin-top: 8px; font-weight: 600; }
+  @media (max-width: 700px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* CLIENT STRIP */
+  .client-strip { border-top: 1px solid var(--rule); padding-top: 28px; margin-top: 40px; }
+  .client-strip p { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; font-weight: 700; color: var(--ink-mute); margin: 0 0 14px; }
+  .client-names { display: flex; flex-wrap: wrap; gap: 0; }
+  .client-name { font-size: 13px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+  .client-sep { color: var(--rule); font-weight: 300; margin: 0 14px; font-size: 16px; line-height: 1; align-self: center; }
+
+  /* PHOTOS */
+  .photo { background: var(--cream-deep); overflow: hidden; }
+  .photo img { width: 100%; object-fit: cover; display: block; transition: transform 700ms ease; }
+  .photo:hover img { transform: scale(1.035); }
+  .photo-grid { display: grid; gap: 14px; }
+  .photo-grid.two { grid-template-columns: 1fr 1fr; }
+  .photo-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .photo-grid.four { grid-template-columns: repeat(4, 1fr); }
+  .photo-grid.quad {
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  .photo-grid.quad > :nth-child(1) { grid-row: 1 / 4; }
+  .photo-grid.quad .photo { height: 100%; min-height: 0; }
+  .photo-grid.quad .photo img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+  @media (max-width: 860px) {
+    .photo-grid.quad { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .photo-grid.quad > :nth-child(1) { grid-row: 1; grid-column: 1/3; }
+    .photo-grid.quad .photo img { aspect-ratio: 3/2; }
+    .photo-grid.four { grid-template-columns: 1fr 1fr; }
+  }
+  .photo-caption { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-mute); margin-top: 10px; }
+
+  /* COMMITMENT GRID */
+  .commitment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 48px; border-top: 1px solid var(--rule); }
+  .commitment {
+    padding: 32px 36px 32px 0; border-bottom: 1px solid var(--rule);
+    display: grid; grid-template-columns: 44px 1fr; gap: 20px; align-items: start;
+  }
+  .commitment:nth-child(even) { padding-left: 36px; padding-right: 0; border-left: 1px solid var(--rule); }
+  .commitment-num { font-size: 11px; font-weight: 700; color: var(--terracotta); text-transform: uppercase; letter-spacing: 0.12em; padding-top: 3px; }
+  .commitment h3 { font-size: 16px; font-weight: 700; margin: 0 0 7px; letter-spacing: -0.01em; }
+  .commitment p { font-size: 14px; line-height: 1.65; color: var(--ink-soft); margin: 0; }
+  @media (max-width: 800px) {
+    .commitment-grid { grid-template-columns: 1fr; }
+    .commitment:nth-child(even) { padding-left: 0; border-left: none; }
+  }
+
+  /* BOOKING TYPE EXAMPLES */
+  .booking-examples { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+  .booking-card {
+    background: #FFF; border: 1px solid var(--rule); padding: 28px 28px 32px;
+    display: flex; flex-direction: column;
+  }
+  .booking-card .tag {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--terracotta);
+    min-height: 32px; padding-bottom: 12px;
+  }
+  .booking-card h4 { font-size: 16px; font-weight: 700; margin: 0 0 10px; letter-spacing: -0.01em; min-height: 48px; }
+  .booking-card p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; flex-grow: 1; }
+  .booking-card .meta {
+    min-height: 80px;
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--rule-soft);
+    font-size: 12px; color: var(--ink-mute); text-transform: uppercase;
+    letter-spacing: 0.12em; font-weight: 600;
+  }
+  @media (max-width: 1000px) { .booking-examples { grid-template-columns: 1fr 1fr; gap: 14px; } }
+  @media (max-width: 600px)  { .booking-examples { grid-template-columns: 1fr; gap: 12px; } }
+
+  /* PHOTO CAPTION CONSISTENCY */
+  .photo-grid.four .photo { display: flex; flex-direction: column; }
+  .photo-grid.four .photo img { flex: 1 1 auto; }
+  .photo-grid.four .photo .photo-caption { flex: 0 0 auto; min-height: 30px; }
+
+  /* CALLOUTS */
+  .callout { padding: clamp(56px, 8vw, 104px) 0; margin: 0; max-width: none; }
+  .callout.teal { background: var(--teal); color: #FFF; }
+  .callout.ink  { background: var(--ink); color: #FFF; }
+  .callout .inner { max-width: var(--max); margin: 0 auto; padding: 0 clamp(24px, 5vw, 80px); }
+  .callout .title { color: #FFF; }
+  .callout .superhead { color: rgba(255,255,255,0.65); }
+
+  /* FAQ GRID */
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+  .faq-item {
+    padding: 32px 36px 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .faq-item:nth-child(even) { padding-left: 36px; padding-right: 0; border-left: 1px solid rgba(255,255,255,0.12); }
+  .faq-item:nth-last-child(-n+2) { border-bottom: none; }
+  .faq-q {
+    font-size: 15px; font-weight: 700; color: #FFF;
+    margin: 0 0 10px; letter-spacing: -0.005em; line-height: 1.3;
+  }
+  .faq-a { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.72); margin: 0; }
+  @media (max-width: 800px) {
+    .faq-grid { grid-template-columns: 1fr; }
+    .faq-item:nth-child(even) { padding-left: 0; border-left: none; }
+    .faq-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .faq-item:last-child { border-bottom: none; }
+  }
+
+  /* TRIAL BANNER */
+  .trial-banner {
+    margin-top: 48px; padding: 32px 36px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.2);
+    display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+  }
+  .trial-banner h4 { font-size: 18px; font-weight: 700; color: #FFF; margin: 0 0 8px; }
+  .trial-banner p { font-size: 15px; color: rgba(255,255,255,0.72); margin: 0; line-height: 1.6; }
+  @media (max-width: 700px) { .trial-banner { grid-template-columns: 1fr; } }
+
+  /* WALK STEPS */
+  .walk { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+  .walk .step { border-top: 2px solid rgba(255,255,255,0.25); padding-top: 24px; }
+  .step-num { font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; color: rgba(255,255,255,0.55); margin-bottom: 10px; }
+  .step h4 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 10px; color: #FFF; }
+  .step p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.68); margin: 0; }
+  @media (max-width: 800px) { .walk { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.55); padding: clamp(36px, 5vh, 60px) 0; }
+  footer .inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 80px);
+    display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  }
+  footer .sig { font-weight: 600; color: #FFF; font-size: 15px; }
+  footer .contact { font-size: 13px; margin-top: 6px; line-height: 1.8; }
+  footer .contact a { color: rgba(255,255,255,0.6); }
+  footer .contact a:hover { color: var(--terracotta); text-decoration: none; }
+  footer .logo-wrap img { height: 18px; width: auto; opacity: 0.4; }
+
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <div class="cocoon">
+        <img class="logomark" src="img/cocoon/mark-128.png" alt="Cocoon mark" width="28" height="28" />
+        <img class="wordmark" src="img/cocoon/wordmark-640.png" alt="Cocoon Flex Spaces" height="16" />
+      </div>
+      <div class="bar"></div>
+      <span class="label">Board Overview</span>
+    </div>
+    <div class="topbar-meta">Confidential · 2026</div>
+  </div>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-grid">
+    <div class="cover-text">
+      <div>
+        <div class="eyebrow" style="margin-bottom:22px;">For the Board of Directors</div>
+        <h1 class="title">How Cocoon works<br>with residential<br><span style="color:var(--terracotta);">buildings.</span></h1>
+        <p class="lede" style="margin-top:26px; max-width:460px;">This document explains how we operate, what we ask of a building, and what the board's actual exposure is — which is none. We've prepared it so you have the information needed to make a clear-eyed decision.</p>
+      </div>
+      <div class="cover-meta">
+        <div><strong>Prepared by</strong> Eduard Monteagudo, Founder — Cocoon Flex Spaces</div>
+        <div><strong>For</strong> The Board of Directors</div>
+        <div><strong>Nature</strong> Informational overview — no obligation to proceed</div>
+        <div><strong>Privacy</strong> This building's address is not disclosed publicly</div>
+      </div>
+    </div>
+    <div class="cover-image">
+      <img src="img/maxima/01.jpg" alt="Casa Maxima — Cocoon Flex Spaces" />
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section>
+  <div class="eyebrow">About Cocoon Flex Spaces</div>
+  <div class="two-col">
+    <div>
+      <h2 class="headline">A production and event management company, operating in NYC residential buildings since 2015.</h2>
+      <p class="lede">We manage the logistics of placing professional clients — media companies, fashion brands, and advertising agencies — into curated private spaces for small-scale, high-quality productions and events.</p>
+      <p style="color:var(--ink-soft); font-size:15px; line-height:1.7;">When we work with a residential building, we serve as the exclusive point of contact between the unit owner and all incoming clients. The building's role is minimal. Our role is total.</p>
+    </div>
+    <div>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="num">10+</div>
+          <div class="label">Years operating in NYC</div>
+        </div>
+        <div class="stat">
+          <div class="num">0</div>
+          <div class="label">Neighbor incidents on record</div>
+        </div>
+        <div class="stat">
+          <div class="num">100%</div>
+          <div class="label">COI coverage per booking</div>
+        </div>
+        <div class="stat">
+          <div class="num">1–2</div>
+          <div class="label">Bookings per quarter, on average</div>
+        </div>
+      </div>
+
+      <div class="client-strip">
+        <p>A selection of companies we have served</p>
+        <div class="client-names">
+          <span class="client-name">Fendi</span><span class="client-sep">·</span>
+          <span class="client-name">Louis Vuitton</span><span class="client-sep">·</span>
+          <span class="client-name">Apple</span><span class="client-sep">·</span>
+          <span class="client-name">Nike</span><span class="client-sep">·</span>
+          <span class="client-name">Netflix</span><span class="client-sep">·</span>
+          <span class="client-name">HBO</span><span class="client-sep">·</span>
+          <span class="client-name">Google</span><span class="client-sep">·</span>
+          <span class="client-name">Vogue</span><span class="client-sep">·</span>
+          <span class="client-name">Sephora</span><span class="client-sep">·</span>
+          <span class="client-name">L'Oréal</span><span class="client-sep">·</span>
+          <span class="client-name">Amazon</span><span class="client-sep">·</span>
+          <span class="client-name">American Express</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT A BOOKING LOOKS LIKE -->
+<section style="background: var(--cream-warm);">
+  <div class="eyebrow">What a Typical Booking Looks Like</div>
+  <h2 class="headline" style="max-width:560px;">Small footprint. Vetted clients. Controlled access.</h2>
+  <p class="lede" style="max-width:640px;">We do not host parties. We do not work with individuals. Every booking is a professional engagement with a confirmed company, a defined guest list, and a Cocoon team member on-site throughout. The examples below represent a cross-section of the types of projects we manage.</p>
+
+  <div class="booking-examples">
+    <div class="booking-card">
+      <div class="tag">Media Production</div>
+      <h4>Home goods photo shoot</h4>
+      <p>A lifestyle brand photographs its fall collection in a beautifully appointed apartment. Small crew, no noise, no deliveries to common areas beyond a single trolley at load-in.</p>
+      <div class="meta">8–12 people · single day · vetted crew list</div>
+    </div>
+    <div class="booking-card">
+      <div class="tag">Showroom</div>
+      <h4>By-appointment fashion showroom</h4>
+      <p>A fashion label hosts buyers over two days. Four guests at a time, by scheduled appointment. No foot traffic in common areas beyond normal residential use. No signage.</p>
+      <div class="meta">4–6 guests per slot · 2 days · zero street presence</div>
+    </div>
+    <div class="booking-card">
+      <div class="tag">Press &amp; Media Event</div>
+      <h4>Small media event</h4>
+      <p>A home products company hosts media editors for a brand presentation. Confirmed guest list, managed arrival times, Cocoon team member at the door. Space returned in original condition same day.</p>
+      <div class="meta">Up to 30–35 guests · half day · confirmed guest list</div>
+    </div>
+    <div class="booking-card">
+      <div class="tag">Executive Meeting</div>
+      <h4>Off-site team meeting</h4>
+      <p>A brand team from a company like LVMH, Pepsi, or Apple uses the space for a private off-site — strategy sessions, presentations, or small leadership gatherings in a quiet residential setting.</p>
+      <div class="meta">Up to 20–25 people · full day · confirmed attendee list</div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR SPACES — PHOTO SHOWCASE -->
+<section class="full" style="border-top: 1px solid var(--rule);">
+  <div style="padding: clamp(56px,9vh,120px) clamp(24px,5vw,80px); max-width: var(--max); margin: 0 auto;">
+    <div class="eyebrow">Our Properties</div>
+    <h2 class="headline" style="max-width:560px;">The kind of spaces our clients come to work in.</h2>
+    <p style="color:var(--ink-soft); font-size:15px; max-width:560px; line-height:1.65; margin-bottom:32px;">Every space shown here is in a co-op or condominium building whose board reviewed how we work and cleared Cocoon to operate. We manage bookings in all of them on an ongoing basis, with no incidents and no impact on neighbors. Our clients choose these homes because they are quiet, private, and residential in character — the opposite of a venue.</p>
+
+    <!-- Row 1: original four properties -->
+    <div class="photo-grid four" style="gap:14px;">
+      <div class="photo lb">
+        <img src="img/maxima/02.jpg" alt="Casa Maxima" style="aspect-ratio:3/4; object-fit:cover;" />
+        <p class="photo-caption">Casa Maxima</p>
+      </div>
+      <div class="photo lb">
+        <img src="img/astor/01.jpg" alt="Casa Astor" style="aspect-ratio:3/4; object-fit:cover;" />
+        <p class="photo-caption">Casa Astor</p>
+      </div>
+      <div class="photo lb">
+        <img src="img/san-andres/02.jpg" alt="Casa San Andres" style="aspect-ratio:3/4; object-fit:cover;" />
+        <p class="photo-caption">Casa San Andres</p>
+      </div>
+      <div class="photo lb">
+        <img src="img/caeli/01.jpg" alt="Casa Caeli" style="aspect-ratio:3/4; object-fit:cover;" />
+        <p class="photo-caption">Casa Caeli</p>
+      </div>
+    </div>
+
+    <!-- Row 2: new money shots — Victoria and Strand -->
+    <div class="photo-grid two" style="gap:14px; margin-top:14px;">
+      <div class="photo lb">
+        <img src="img/victoria/01.jpg" alt="Casa Victoria" style="aspect-ratio:3/2; object-fit:cover; width:100%;" />
+        <p class="photo-caption">Casa Victoria</p>
+      </div>
+      <div class="photo lb">
+        <img src="img/strand/01.jpg" alt="Casa Strand" style="aspect-ratio:3/2; object-fit:cover; width:100%;" />
+        <p class="photo-caption">Casa Strand</p>
+      </div>
+    </div>
+
+    <!-- Row 3: four wide detail shots -->
+    <div class="photo-grid four" style="gap:14px; margin-top:14px;">
+      <div class="photo lb">
+        <img src="img/astor/02.jpg" alt="Casa Astor — Kitchen and living area" style="aspect-ratio:3/2; object-fit:cover; width:100%;" />
+      </div>
+      <div class="photo lb">
+        <img src="img/maxima/03.jpg" alt="Casa Maxima" style="aspect-ratio:3/2; object-fit:cover; width:100%;" />
+      </div>
+      <div class="photo lb">
+        <img src="img/victoria/02.jpg" alt="Casa Victoria — Kitchen" style="aspect-ratio:3/2; object-fit:cover; width:100%;" />
+      </div>
+      <div class="photo lb">
+        <img src="img/strand/02.jpg" alt="Casa Strand — Master Bathroom" style="aspect-ratio:3/2; object-fit:cover; width:100%;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR COMMITMENTS -->
+<section style="border-top: 1px solid var(--rule);">
+  <div class="eyebrow">How We Operate</div>
+  <h2 class="headline" style="max-width:600px;">What we commit to, on every booking, without exception.</h2>
+  <p class="lede" style="max-width:580px;">These are not aspirational guidelines. They are standard operating procedure. Boards who have reviewed these commitments have found them to be straightforward and sufficient.</p>
+
+  <div class="commitment-grid">
+    <div class="commitment">
+      <div class="commitment-num">01</div>
+      <div>
+        <h3>Zero cost and zero obligation to the building</h3>
+        <p>No fee, no contract, and no financial obligation for the building or board. All arrangements are exclusively between Cocoon and the unit owner.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">02</div>
+      <div>
+        <h3>The unit owner approves every booking</h3>
+        <p>Nothing is confirmed without the unit owner's explicit sign-off. The board is not involved in individual booking decisions — that responsibility sits entirely with the owner.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">03</div>
+      <div>
+        <h3>A Cocoon team member is on-site, always</h3>
+        <p>The space is never left unattended. At least one Casa Manager is on-site for every booking, and often two, to make sure there is zero impact on the building and its residents. Our team manages client arrival, the booking itself, and close-out. We are the first and last people in the building each day.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">04</div>
+      <div>
+        <h3>Guest counts are limited and lists are confirmed</h3>
+        <p>We set strict maximums for each booking type — typically 8–30 people, depending on the nature of the project. Every guest is confirmed by name before the booking date. There are no open invitations and no walk-ins.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">05</div>
+      <div>
+        <h3>No parties, no amplified music, no events with open bars</h3>
+        <p>We do not accept social events or parties in residential buildings. If a booking doesn't fit the professional profile we require, we decline it — regardless of the fee.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">06</div>
+      <div>
+        <h3>Load-in and load-out within pre-approved windows</h3>
+        <p>All equipment and materials move in and out during hours approved by the unit owner. We use freight entrances where available and coordinate directly with building staff as needed.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">07</div>
+      <div>
+        <h3>Certificate of Insurance naming the building on every booking</h3>
+        <p>Every booking carries a COI that names the building as an additional insured, with waiver of subrogation. The board can request to see a sample COI at any time.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">08</div>
+      <div>
+        <h3>The building's address is never published or shared publicly</h3>
+        <p>We do not list spaces by address, neighborhood, or any detail that would allow the public to identify the building. The address is shared only with confirmed, vetted clients under a signed agreement.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">09</div>
+      <div>
+        <h3>Residents are never approached or engaged without consent</h3>
+        <p>Our clients interact only with the unit and Cocoon staff. We do not involve or contact other residents. Any neighbor who has questions or concerns is directed to the Casa Manager directly — not through building management or the unit owner.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">10</div>
+      <div>
+        <h3>Building management receives advance notice of every confirmed booking</h3>
+        <p>Once a booking is confirmed and approved by the unit owner, we notify building management with the date, time window, and number of people. No surprises. This is a practice that has worked well in every building we operate in, and we consider it a standard part of how we work.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">11</div>
+      <div>
+        <h3>Experienced operating alongside heightened security and privacy protocols</h3>
+        <p>Several buildings we work with have protocols in place for residents who require an elevated level of discretion — including public figures and high-net-worth households. We are practiced at operating within these environments and are fully open to adopting any custom protocols the building wishes to put in place.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">12</div>
+      <div>
+        <h3>The building's architecture is protected at every step</h3>
+        <p>A building designed by Tadao Ando deserves the same care as the work inside it. Floor and corner protection goes down along the full path from the entrance to the unit before any equipment comes in, and the elevator is padded. Nothing is taped, glued, fixed, hung or rigged on concrete, walls or ceilings, and equipment moves on soft-wheeled carts.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">13</div>
+      <div>
+        <h3>A joint walkthrough before and after every booking</h3>
+        <p>Our Casa Manager walks the unit and common areas with building management before the booking starts and again after it ends. Both walkthroughs are photographed, and the condition report is shared with the board.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">14</div>
+      <div>
+        <h3>Crew holding, catering and vehicles stay outside the building</h3>
+        <p>For productions, crew holding, catering, wardrobe and vehicles are kept off-site. The lobby and common areas are never used for staging, only the people needed for each setup are inside the unit, and productions hold all city filming permits their work requires.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">15</div>
+      <div>
+        <h3>A security deposit on every booking</h3>
+        <p>On top of the client's insurance, every booking is backed by a security deposit of 25% of the booking, held by Cocoon and applied directly to any damage. The building never has to chase a client.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">16</div>
+      <div>
+        <h3>References from boards we already work with</h3>
+        <p>If it helps the board's decision, we are glad to connect you with a board member or managing agent from a building where we already operate, so you can hear directly how the relationship has worked.</p>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commitment-num">17</div>
+      <div>
+        <h3>Optional compensation arrangement for the board</h3>
+        <p>For select bookings, we are open to discussing a compensation structure for the board. This is entirely at the board's discretion — there is no obligation to participate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ / BOARD QUESTIONS -->
+<section class="callout teal full">
+  <div class="inner">
+    <div class="superhead">Questions Boards Typically Ask</div>
+    <h2 class="title" style="font-size:clamp(28px,3.8vw,52px); color:#FFF; margin:16px 0 0;">Direct answers<br>to the right questions.</h2>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <p class="faq-q">Who is liable if something goes wrong?</p>
+        <p class="faq-a">The renter. Every client is required to provide their own Certificate of Insurance, and our contract explicitly places liability with them. The building is named as an additional insured on every COI, with waiver of subrogation. Additionally, every booking is backed by a 25% security deposit that we hold and can apply against any claim. In practice, we have never needed to invoke it.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What does a booking actually look like from the building's perspective?</p>
+        <p class="faq-a">A small group of professionals arrives at a specific time, uses the unit, and leaves. Common areas see no more foot traffic than a typical dinner party. There is no signage, no music, no indication anything is happening.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">How often does this happen?</p>
+        <p class="faq-a">On average, 1 to 2 bookings per quarter. There are quarters with no bookings at all. This is not a short-term rental operation — there is no daily turnover, no strangers in the hallway every weekend.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Who exactly is coming into the building?</p>
+        <p class="faq-a">Corporate professionals — media crews, fashion editors, brand representatives. Every client is vetted before we accept the booking. The unit owner sees the full client profile before approving.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Does anyone outside know this is happening?</p>
+        <p class="faq-a">No. We never publish the building's address. The location is shared only with confirmed clients, under a signed non-disclosure clause. There is no public listing associated with this building.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What if the board wants to try this before fully committing?</p>
+        <p class="faq-a">We can start with a single booking as a pilot. The board reviews how it went, including the before-and-after condition report, before any further booking is approved. From there, we offer a 6-month trial period, and the board can end the arrangement at any time, without explanation or penalty.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What about other residents in the building?</p>
+        <p class="faq-a">Neighbors are not affected or engaged in any way. If a neighbor happens to be interested in Cocoon's services for their own unit, we are happy to have that conversation separately — on their terms, entirely independently of this arrangement.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What if our building has specific security or privacy requirements?</p>
+        <p class="faq-a">We are very familiar with this. We regularly operate in buildings with heightened protocols — including those housing public figures and high-net-worth individuals. We are practiced at working within strict discretion requirements and are happy to discuss any custom protocols the board wants in place. Adaptability to the building's standards is not something we do reluctantly — it is simply how we work.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Will the building management team know when bookings are happening?</p>
+        <p class="faq-a">Yes — this is standard practice for us. Once a booking is confirmed and approved by the unit owner, we send advance notice to building management: the date, the time window, and how many people. Management is never caught off-guard. In our experience, this single step makes the day-to-day relationship with buildings run far more smoothly.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What does the board actually need to do?</p>
+        <p class="faq-a">Provide a simple letter of non-objection. That is the full extent of the board's involvement. Cocoon manages everything else — before, during, and after every booking.</p>
+      </div>
+    </div>
+
+    <!-- Trial Period Banner -->
+    <div class="trial-banner">
+      <div>
+        <h4>A 6-month trial period is available.</h4>
+        <p>We understand that any new arrangement in a residential building requires trust. We offer a structured 6-month trial — no long-term commitment, no obligation to continue. Most boards find it's enough time to see exactly how we work.</p>
+      </div>
+      <div style="font-size:40px; opacity:0.3; font-weight:700; letter-spacing:-0.03em; white-space:nowrap;">6 mo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section class="callout ink full">
+  <div class="inner">
+    <div class="superhead" style="color:rgba(255,255,255,0.5);">Next Steps</div>
+    <h2 class="title" style="font-size:clamp(30px,4vw,56px); color:#FFF; margin:16px 0 14px;">No rush.<br><span style="color:var(--terracotta);">Questions welcome.</span></h2>
+    <p style="color:rgba(255,255,255,0.68); font-size:clamp(15px,1.3vw,18px); max-width:520px; line-height:1.65; margin:0 0 48px;">We are happy to answer any questions — including providing a sample COI, walking through a specific booking type, or speaking with the board directly. There is no timeline or pressure to decide.</p>
+    <div class="walk">
+      <div class="step">
+        <div class="step-num">Option A</div>
+        <h4>Take the time you need</h4>
+        <p>Share this document with all board members and discuss at your own pace. Eduard is available to answer follow-up questions at any point.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Option B</div>
+        <h4>Request a conversation</h4>
+        <p>Eduard is available for a brief call or in-person meeting with the board — to walk through how this works, answer questions directly, and address any specific concerns.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">Option C</div>
+        <h4>Start with a single pilot booking</h4>
+        <p>If the board would like to proceed, a simple letter of non-objection is all we need. We begin with one pilot booking that the board reviews before approving any more, followed by a 6-month trial with no obligation to continue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="inner">
+    <div>
+      <div class="sig">Eduard Monteagudo · Founder, Cocoon Flex Spaces</div>
+      <div class="contact">
+        <a href="mailto:eduard@cocoonflexspaces.com">eduard@cocoonflexspaces.com</a>
+        &nbsp;·&nbsp;
+        <a href="tel:+19173983938">+1 (917) 398-3938</a>
+        &nbsp;·&nbsp;
+        <a href="https://cocoonflexspaces.com" target="_blank" rel="noopener">cocoonflexspaces.com</a>
+      </div>
+    </div>
+    <div class="logo-wrap" style="display:flex; align-items:center; gap:14px;">
+      <img src="img/cocoon/mark-128.png" alt="Cocoon mark" style="height:44px; width:auto; filter:brightness(0) invert(1);" />
+      <img src="img/cocoon/wordmark-640-cream.png" alt="Cocoon Flex Spaces" style="height:18px; width:auto; opacity:0.4;" />
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb-overlay" style="position:fixed; z-index:9000; inset:0; background:rgba(0,0,0,0.92); cursor:zoom-out; align-items:center; justify-content:center; display:none;">
+  <img id="lb-img" style="max-width:92vw; max-height:92vh; object-fit:contain; display:block;" />
+</div>
+
+<style>
+  .photo.lb img { cursor: zoom-in; }
+</style>
+
+<script>
+  const lbOverlay = document.getElementById('lb-overlay');
+  const lbImg = document.getElementById('lb-img');
+
+  function lbOpen(src) {
+    lbImg.src = src;
+    lbOverlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    lbOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.photo.lb img').forEach(img => {
+    img.addEventListener('click', () => lbOpen(img.src));
+  });
+  lbOverlay.addEventListener('click', lbClose);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lbClose(); });
+</script>
+</body>
+</html>

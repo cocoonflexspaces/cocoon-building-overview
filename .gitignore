@@ -1,0 +1,9 @@
+# Internal tooling — never commit
+decode-images.py
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+*.swp
